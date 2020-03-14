@@ -1,8 +1,14 @@
-import React,{useState} from 'react';
+import React,{useState, Fragment} from 'react';
 import NewsList from './NewsList';
+import Categories from './Categories';
 
 const App = () => {
-    return <NewsList />
+    return (
+        <Fragment>
+            <Categories />
+            <NewsList />
+        </Fragment>
+    )
 }
 
 export default App;
