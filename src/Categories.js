@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled,{css} from 'styled-components';
 
 const CategoriesBlock = styled.div`
     display: flex;
@@ -23,6 +23,16 @@ const Category = styled.div`
     &:hover {
         color: #495057;
     }
+
+    ${prop =>
+        prop.acti && css`
+            font-weight:600;
+            border-bottom: 2px solid #22b8cf;
+            color: #22b8cf;
+            &:hover {
+                color: #3bc9db;
+            }
+    `}
 
     &+& {
         margin-left:1rem;
@@ -56,11 +66,12 @@ const categories = [
     }
 ];
 
-const Categories = () => {
+const Categories = ({onSelect, category}) => {
     return (
         <CategoriesBlock>
             {categories.map(item => (
-                <Category key={item.name}>{item.text}</Category>
+                <Category key={item.name} acti={category===item.name} onClick={() => onSelect(item.name)}>{item.text}</Category>
+                //acti 를 임의로 만들어서 true가 되면 위의 prop를 실행
             ))}
         </CategoriesBlock>
     )

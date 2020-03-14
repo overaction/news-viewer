@@ -1,11 +1,14 @@
-import React,{useState, Fragment} from 'react';
+import React,{useState, Fragment, useCallback} from 'react';
 import NewsList from './NewsList';
 import Categories from './Categories';
 
 const App = () => {
+    const [category, setCategory] = useState('all');
+    const onSelect = useCallback(cate => setCategory(cate),[]);
+
     return (
         <Fragment>
-            <Categories />
+            <Categories category={category} onSelect={onSelect}/>
             <NewsList />
         </Fragment>
     )
