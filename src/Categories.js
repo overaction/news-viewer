@@ -1,5 +1,6 @@
 import React from 'react';
-import styled,{css} from 'styled-components';
+import styled from 'styled-components';
+import {NavLink} from 'react-router-dom';
 
 const CategoriesBlock = styled.div`
     display: flex;
@@ -12,7 +13,8 @@ const CategoriesBlock = styled.div`
     }
 `;
 
-const Category = styled.div`
+// NavLink로 만들어진 Category 컴포넌트. NavLink의 기능들을 사용할 수 있다
+const Category = styled(NavLink)`
     font-size: 1.125rem;
     cursor: pointer;
     white-space: pre;
@@ -24,15 +26,14 @@ const Category = styled.div`
         color: #495057;
     }
 
-    ${prop =>
-        prop.acti && css`
-            font-weight:600;
-            border-bottom: 2px solid #22b8cf;
-            color: #22b8cf;
-            &:hover {
-                color: #3bc9db;
-            }
-    `}
+    &.acti {
+        font-weight: 600;
+        border-bottom: 2px solid #22b8cf;
+        color: #22b8cf;
+        &:hover {
+            color: #3bc9db;
+        }
+    }
 
     &+& {
         margin-left:1rem;
@@ -70,8 +71,14 @@ const Categories = ({onSelect, category}) => {
     return (
         <CategoriesBlock>
             {categories.map(item => (
-                <Category key={item.name} acti={category===item.name} onClick={() => onSelect(item.name)}>{item.text}</Category>
-                //acti 를 임의로 만들어서 true가 되면 위의 prop를 실행
+                <Category
+                    key={item.name}
+                    activeClassName="acti"
+                    exact={item.name === 'all'}
+                    to={item.name === 'all' ? '/' : `/${item.name}`}
+                >
+                    {item.text}
+                </Category>
             ))}
         </CategoriesBlock>
     )

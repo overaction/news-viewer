@@ -1,17 +1,10 @@
-import React,{useState, Fragment, useCallback} from 'react';
-import NewsList from './NewsList';
-import Categories from './Categories';
+import React from 'react';
+import {Route} from 'react-router-dom';
+import NewsPage from './NewsPage';
 
 const App = () => {
-    const [category, setCategory] = useState('all');
-    const onSelect = useCallback(cate => setCategory(cate),[]);
-
-    return (
-        <Fragment>
-            <Categories category={category} onSelect={onSelect}/>
-            <NewsList category={category}/>
-        </Fragment>
-    )
+    return <Route path="/:category?" component={NewsPage} />;
+    // category? 의 물음표는 category 값이 있을수도 있고 없을수도 있다는 뜻이다
 }
 
 export default App;
