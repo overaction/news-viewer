@@ -67,7 +67,7 @@ const categories = [
     }
 ];
 
-const Categories = ({onSelect, category}) => {
+const Categories = () => {
     return (
         <CategoriesBlock>
             {categories.map(item => (
@@ -76,6 +76,7 @@ const Categories = ({onSelect, category}) => {
                     activeClassName="acti"
                     exact={item.name === 'all'}
                     to={item.name === 'all' ? '/' : `/${item.name}`}
+                    //to 가 onClick을 대체한다
                 >
                     {item.text}
                 </Category>

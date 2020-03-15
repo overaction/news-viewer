@@ -16,14 +16,14 @@ const NewsListBlock = styled.div `
     }
 `;
 
-const NewsList = ({category}) => {
+const NewsList = ({categor}) => {
     const [articles, setArticles] = useState(null);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const query = category === 'all' ? '' : `&category=${category}`;
+                const query = categor === 'all' ? '' : `&category=${categor}`;
                 const respon = await axios.get(`https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=e3dc0c5106804f69a4876a24bb702893`)
                 setArticles(respon.data.articles);
             } catch (e) {
@@ -32,7 +32,7 @@ const NewsList = ({category}) => {
             setLoading(false);
         };
         fetchData();
-    },[category]); //[category] 사용해서 category가 바뀔 때마다 뉴스를 새로 불러옴
+    },[categor]); //[category] 사용해서 category가 바뀔 때마다 뉴스를 새로 불러옴
 
     if(loading) {
         return <NewsListBlock>대기중..</NewsListBlock>
